@@ -39,6 +39,8 @@ try {
     }
 } catch (Exception $e) {
     $result = HTTPStatus(400);
+    date_default_timezone_set('America/Toronto');
+    error_log(date("Y-m-d h:i:sa")." : ".$e->getMessage()."\n", 3, "errors.log");
     print json_encode($result, JSON_PRETTY_PRINT);
     exit();
 }
@@ -67,6 +69,8 @@ try {
     echo json_encode($result);
 } catch (PDOException $e) {
     $result = HTTPStatus(500);
+    date_default_timezone_set('America/Toronto');
+    error_log(date("Y-m-d h:i:sa")." : ".$e->getMessage()."\n", 3, "errors.log");
     print json_encode($result, JSON_PRETTY_PRINT);
     exit();
 }
@@ -160,7 +164,7 @@ function HTTPStatus($num) {
     );
 
     header($http[$num]);
-
+    header('Content-Type: application/json;charset=utf-8');
     return
         array(
             'CODE' => $num,
