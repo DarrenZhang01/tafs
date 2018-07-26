@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `user_associations` (
 
 CREATE TABLE IF NOT EXISTS `questions` (
     `question_id` INT(0) AUTO_INCREMENT PRIMARY KEY,
-    `answer_type` ENUM('text', 'radiogroup'),
+    `answer_type` ENUM('radiogroup','comment','rating'),
     `content` VARCHAR(2000) NOT NULL
 );
 
@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `surveys` (
 
 CREATE TABLE IF NOT EXISTS `survey_instances` (
     `survey_instance_id` INT(0) PRIMARY KEY AUTO_INCREMENT,
+    `viewable_by_others` bit,
     `survey_id` INT,
     `choices_id` INT,
     `user_association_id` INT,
